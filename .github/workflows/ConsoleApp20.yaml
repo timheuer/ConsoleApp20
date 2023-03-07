@@ -47,6 +47,9 @@ jobs:
     - name: Pack
       run: dotnet pack
 
+    - name: Push to GPR
+      run: dotnet nuget push **/*.nupkg --skip-duplicate --api-key ${{ secrets.GH_PAT }} --source https://nuget.pkg.github.com/timheuer/index.json
+
     - name: Add GPR Source
       run: dotnet nuget add source --username timheuer --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name GPR https://nuget.pkg.github.com/timheuer/index.json
  
